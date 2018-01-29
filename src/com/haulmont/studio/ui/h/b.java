@@ -4,9 +4,9 @@ import java.util.Set;
 
 
 /*
-        D:\javacodes\studio\lib\studio-ui-6.7.6.jar!\com\haulmont\studio\ui\h\a.class
+        D:\javacodes\studio\lib\studio-ui-6.7.6.jar!\com\haulmont\studio\\ui\\h\\a.class
 
-//接受UDP数据包  D:\javacodes\studio\lib\studio-ui-6.7.6.jar!\com\haulmont\studio\ui\h\b.class
+//接受UDP数据包  D:\javacodes\studio\lib\studio-ui-6.7.6.jar!\com\haulmont\studio\\ui\\h\\b.class
 private void c() {
         String var1 = this.c.d();
         String var2 = this.c.f();
@@ -26,7 +26,8 @@ private void c() {
 //如果序列号一致 机器码不同 时间戳小于当前时间戳 报错。
 */
 class b implements Runnable {
-    b(c var1, Set var2) {
+    b(a var1, String var2, String var3) {
+
     }
 
     public void run() {
