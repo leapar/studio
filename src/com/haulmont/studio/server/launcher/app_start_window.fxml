@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2015 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<GridPane hgap="10" prefWidth="500" vgap="7"
+          xmlns="http://javafx.com/javafx/8"
+          xmlns:fx="http://javafx.com/fxml/1"
+          styleClass="main-pane"
+          fx:controller="com.haulmont.studio.server.launcher.AppStartWindow">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10"/>
+    </padding>
+
+    <columnConstraints>
+        <ColumnConstraints halignment="RIGHT" hgrow="NEVER"/>
+        <ColumnConstraints hgrow="ALWAYS"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+        <RowConstraints vgrow="NEVER"/>
+    </rowConstraints>
+
+    <Label fx:id="portLab" text="服务器端口" GridPane.rowIndex="0"/>
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <TextField fx:id="portField" prefWidth="60.0" maxWidth="-Infinity"
+                   GridPane.hgrow="NEVER"/>
+        <Label HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+        <Button fx:id="startBtn" minWidth="70.0" text="启动"/>
+    </HBox>
+
+    <Label fx:id="remoteConnectionLab" alignment="CENTER_RIGHT" maxWidth="Infinity" text="远程连接"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <HBox GridPane.columnIndex="1" GridPane.rowIndex="1" alignment="CENTER_RIGHT">
+        <CheckBox fx:id="remoteConnectionCb"/>
+
+        <Label HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Label fx:id="silentModeLab" alignment="CENTER_RIGHT" maxWidth="Infinity"
+                   text="静默启动" visible="false"/>
+            <CheckBox fx:id="silentModeCb" visible="false"/>
+        </HBox>
+
+        <Label HBox.hgrow="ALWAYS" minWidth="41.0"/>
+
+        <Button fx:id="exitBtn" minWidth="70.0" text="退出"/>
+    </HBox>
+
+    <Label text="服务器状态" GridPane.rowIndex="3"/>
+    <Label fx:id="statusValueLab" text="未启动" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="平台地址" GridPane.rowIndex="4"/>
+    <HBox fx:id="urlBox" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <TextField fx:id="urlTextField" HBox.hgrow="ALWAYS" editable="false"/>
+        <Button fx:id="urlCopyBtn" minWidth="70.0" text="复制">
+            <tooltip>
+                <Tooltip text="复制URL地址"/>
+            </tooltip>
+        </Button>
+        <Button fx:id="urlOpenBtn" maxHeight="Infinity">
+            <tooltip>
+                <Tooltip text="浏览器中打开URL"/>
+            </tooltip>
+            <graphic>
+                <SVGPath content="m 1.0763359,5.0799305 8.2381146,0 0,-2.6538353 4.1190565,3.9807527 -4.1190565,3.9807521 0,-2.6538347 -8.2381146,0 z"
+                         styleClass="urlOpenArrow"/>
+            </graphic>
+        </Button>
+    </HBox>
+</GridPane>

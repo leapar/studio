@@ -1,0 +1,193 @@
+/*
+ * Copyright (c) 2015 Haulmont Technology Ltd. All Rights Reserved.
+ * Haulmont Technology proprietary and confidential.
+ * Use is subject to license terms.
+ */
+
+/* CSS for JavaFx based launcher */
+
+.root {
+    -fx-font-family: Helvetica Neue,Arial,"Nimbus Sans L",Verdana,sans-serif;
+    -fx-font-size: 13;
+}
+
+.dialog-pane,
+.main-pane {
+    -fx-background-color: #333333;
+}
+
+.label {
+    -fx-text-fill: #C6C6C6;
+}
+
+.button {
+    -fx-background-color: #595959;
+    -fx-border-width: 1;
+    -fx-border-color: #1E1E1E;
+    -fx-text-fill: #EBEBEB;
+    -fx-border-insets: -1 -1 -1 -1;
+    -fx-background-insets: 0 0 0 0;
+    -fx-border-radius: 4;
+}
+
+.check-box .box {
+    -fx-background-color: #252526;
+    -fx-border-color: #1E1E1E;
+    -fx-border-insets: -1 -1 -1 -1;
+    -fx-border-radius: 2;
+    -fx-border-width: 1;
+    -fx-background-insets: -1 -1 -1 -1;
+    -fx-pref-width: 14;
+    -fx-pref-height: 14;
+}
+
+.check-box .mark {
+    /* SVG Path for checkbox symbol, Use Inkscape to draw */
+    -fx-shape: "M 2.3555564,3.1070036 4.7742199,5.6501037 9.8107502,0.9932506 11.461135,3.2391035 4.8311361,9.415206 0.76207594,4.8574418 Z";
+    -fx-scale-shape: false;
+    -fx-background-insets: 0 0 0 0;
+}
+
+.check-box:focused .box  {
+    -fx-border-color: #679ed2;
+}
+
+.check-box {
+    -fx-text-fill: #C6C6C6;
+}
+
+.check-box:selected .mark {
+    -fx-background-color: white;
+}
+
+.text-field {
+    -fx-background-color: #252526;
+    -fx-border-color: #1E1E1E;
+    -fx-border-insets: -1 -1 -1 -1;
+    -fx-background-insets: -1 -1 -1 -1;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-text-fill: #c2c2c3;
+}
+
+.text-field:focused {
+    -fx-border-color: #679ed2;
+}
+
+.text-field:readonly {
+    -fx-background-color: #333333;
+}
+
+.combo-box {
+    -fx-background-color: #252526;
+    -fx-border-color: #1E1E1E;
+    -fx-border-insets: -1 -1 -1 -1;
+    -fx-background-insets: -1 -1 -1 -1;
+    -fx-border-radius: 4;
+    -fx-border-width: 1;
+    -fx-text-fill: #c2c2c3;
+}
+
+.combo-box .list-cell {
+    -fx-text-fill: #c2c2c3;
+}
+
+.combo-box-popup .list-view {
+    -fx-border-color: #292929;
+    -fx-border-width: 1;
+    -fx-background-color: #2B2B2B;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #2B2B2B;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #5E94C8;
+    -fx-text-fill: #0B1014;
+}
+
+.combo-box:focused {
+    -fx-border-color: #679ed2;
+}
+
+.combo-box .text-input {
+    -fx-border-radius: 4 0 0 4;
+    -fx-background-radius: 4 0 0 4;
+    -fx-border-insets: -1 0 -1 -1;
+    -fx-background-insets: -1 0 -1 -1;
+    -fx-border-width: 1 0 1 1;
+}
+
+.combo-box .arrow-button {
+    -fx-padding: 0 10 0 10;
+    -fx-border-width: 1 1 1 0;
+    -fx-background-color: #595959;
+    -fx-border-color: #1E1E1E;
+    -fx-border-radius: 0 4 4 0;
+    -fx-background-radius: 0 4 4 0;
+    -fx-border-insets: -1 -1 -1 0;
+    -fx-background-insets: -1 -1 -1 0;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #737373;
+}
+
+.combo-box:focused .arrow-button {
+    -fx-border-color: #679ed2;
+}
+
+.combo-box .arrow-button .arrow {
+    /* SVG Path for checkbox symbol, Use Inkscape to draw */
+    -fx-shape: "M 2.4156525,0.66429068 6.9569154,5.2055536 11.498179,0.66429068 13.314684,2.4807958 6.9569154,8.8385648 0.59914734,2.4807958 Z";
+    -fx-scale-shape: false;
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-color: white;
+}
+
+.button:focused,
+.button:hover {
+    -fx-background-color: #737373;
+}
+
+#javaHomeTextField,
+#gradleTextField {
+    -fx-border-radius: 4 0 0 4;
+    -fx-background-radius: 4 0 0 4;
+    -fx-border-insets: -1 0 -1 -1;
+}
+
+#javaHomeBtn,
+#gradleBtn {
+    -fx-border-radius: 0 4 4 0;
+    -fx-background-radius: 0 4 4 0;
+    -fx-border-insets: -1 -1 -1 0;
+}
+
+.urlOpenArrow {
+    -fx-fill: white;
+}
+
+.status-checking {
+    -fx-text-fill: #679ed2;
+}
+
+.status-running {
+    -fx-text-fill: #71cc97;
+}
+
+.status-stopped {
+    -fx-text-fill: #da555f;
+}
+
+.context-menu {
+    -fx-background-color: #252526;
+    -fx-border-color: #1E1E1E;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
