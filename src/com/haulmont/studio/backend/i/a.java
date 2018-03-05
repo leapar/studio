@@ -3,13 +3,13 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.haulmont.studio.backend.j;
+package com.haulmont.studio.backend.i;
 
 import com.google.common.base.Strings;
-import com.haulmont.studio.backend.k.d;
-import com.haulmont.studio.common.B;
-import com.haulmont.studio.common.G;
-import com.haulmont.studio.common.I;
+import com.haulmont.studio.backend.j.d;
+import com.haulmont.studio.common.C;
+import com.haulmont.studio.common.H;
+import com.haulmont.studio.common.L;
 import com.haulmont.studio.common.e;
 import com.haulmont.studio.common.model.b.n;
 import java.io.IOException;
@@ -18,7 +18,6 @@ import java.lang.reflect.Constructor;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
-import java.net.ProxySelector;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -40,14 +39,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.HttpHostConnectException;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.SystemDefaultRoutePlanner;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,16 +70,16 @@ public class a {
     public d c() {
         Path var1 = this.j();
         if (!Files.exists(var1, new LinkOption[0])) {
-            return com.haulmont.studio.backend.k.d.b;
+            return com.haulmont.studio.backend.j.d.b;
         } else {
-            String var2 = I.b(var1);
+            String var2 = L.b(var1);
             f var3 = this.e(var2);
             if (var3 == null) {
-                return com.haulmont.studio.backend.k.d.c;
+                return com.haulmont.studio.backend.j.d.c;
             } else if (!var3.g() && !var3.e().before(new Date())) {
-                return var3.f() ? com.haulmont.studio.backend.k.d.e : com.haulmont.studio.backend.k.d.a;
+                return var3.f() ? com.haulmont.studio.backend.j.d.e : com.haulmont.studio.backend.j.d.a;
             } else {
-                return com.haulmont.studio.backend.k.d.d;
+                return com.haulmont.studio.backend.j.d.d;
             }
         }
     }
@@ -99,19 +90,19 @@ public class a {
             if (!Strings.isNullOrEmpty(var2)) {
                 Path var3 = this.j();
                 Files.write(var3, var2.getBytes(), new OpenOption[0]);
-                return com.haulmont.studio.backend.j.c.c;
+                return com.haulmont.studio.backend.i.c.c;
             } else {
-                return com.haulmont.studio.backend.j.c.a;
+                return com.haulmont.studio.backend.i.c.a;
             }
         } catch (Exception var5) {
             this.a(var5);
-            return com.haulmont.studio.backend.j.c.a;
+            return com.haulmont.studio.backend.i.c.a;
         }
     }
 
     private void i() {
         d var1 = this.c();
-        if (var1 == com.haulmont.studio.backend.k.d.a) {
+        if (var1 == com.haulmont.studio.backend.j.d.a) {
             String var2 = this.f();
             if (var2 != null) {
                 try {
@@ -138,7 +129,7 @@ public class a {
         CloseableHttpClient var5 = HttpClients.custom().setDefaultRequestConfig(var4).setRoutePlanner(var3).build();
         Throwable var6 = null;
 
-        String var11 = null;
+        String var12;
         try {
             HttpGet var7 = new HttpGet(var2);
             CloseableHttpResponse var8 = var5.execute(var7);
@@ -244,7 +235,7 @@ public class a {
 
     private Path j() {
         String var1 = new String(new byte[]{115, 105, 102, 46, 100, 97, 116});
-        return G.d().resolve(var1);
+        return H.d().resolve(var1);
     }
 
     @Nullable
@@ -253,7 +244,7 @@ public class a {
         if (!Files.exists(var1, new LinkOption[0])) {
             return null;
         } else {
-            String var2 = I.b(var1);
+            String var2 = L.b(var1);
             return this.e(var2);
         }
     }
@@ -262,7 +253,7 @@ public class a {
     private f e(String var1) {
         try {
             if (true) {
-                String  var26 = "sid=170704111693-UODk9IJO1TRG\n" +
+                String  var26 = "sid=170704000693-YQOk9IJO1IFG\n" +
                         "type=C\n" +
                         "name=wang liulsha\n" +
                         "company=luilsh\n" +
@@ -317,11 +308,11 @@ public class a {
     }
 
     @Nullable
-    public B<String, String> g() {
+    public C<String, String> g() {
         f var1 = this.e();
         if (var1 != null) {
             String[] var2 = var1.a().split("-");
-            return new B(var2[0], var2[1]);
+            return new C(var2[0], var2[1]);
         } else {
             return null;
         }

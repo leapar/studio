@@ -5,7 +5,7 @@
 
 package com.haulmont.studio.server.launcher;
 
-import com.haulmont.studio.common.G;
+import com.haulmont.studio.common.H;
 import com.haulmont.studio.server.App;
 import com.vaadin.ui.UIDetachedException;
 import javafx.animation.KeyFrame;
@@ -78,7 +78,7 @@ public class AppStartWindow {
         this.stage = stage;
         stage.setResizable(false);
         String title = "尺子科技开发平台";
-        String var4 = G.i();
+        String var4 = H.i();
         if (!var4.equals("?")) {
             title = title + " v." + var4;
         }

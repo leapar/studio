@@ -2,7 +2,7 @@ package com.haulmont.studio.server;
 
 import com.haulmont.studio.ui.m.d;
 import com.haulmont.studio.ui.app.App;
-import com.haulmont.studio.ui.app.aO;
+import com.haulmont.studio.ui.app.aB;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -15,7 +15,7 @@ class HttpSessionListenerImp implements HttpSessionListener {
 
     public void sessionCreated(HttpSessionEvent var1) {
         this.webServer.logger.debug("HttpSession created: " + var1.getSession());
-        aO var2 = this.getBean(var1);
+        aB var2 = this.getBean(var1);
         if (var2 != null) {
             var2.sessionCreated(var1);
         }
@@ -29,16 +29,16 @@ class HttpSessionListenerImp implements HttpSessionListener {
             var2.b();
         }
 
-        aO var3 = this.getBean(var1);
+        aB var3 = this.getBean(var1);
         if (var3 != null) {
             var3.sessionDestroyed(var1);
         }
 
     }
 
-    private aO getBean(HttpSessionEvent var1) {
+    private aB getBean(HttpSessionEvent var1) {
         d var2 = (d)var1.getSession().getServletContext().getAttribute("ServerBeans");
-        return var2 != null ? (aO)var2.a(aO.class) : null;
+        return var2 != null ? (aB)var2.a(aB.class) : null;
     }
 }
 

@@ -1,8 +1,9 @@
 package com.haulmont.studio.server;
 
-import com.haulmont.studio.common.G;
-import com.haulmont.studio.common.I;
+import com.haulmont.studio.common.H;
 import java.io.File;
+
+import com.haulmont.studio.common.L;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.slf4j.Logger;
@@ -13,7 +14,7 @@ public class Config {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public Config() {
-        File var1 = G.d().resolve("config.xml").toFile();
+        File var1 = H.d().resolve("config.xml").toFile();
 
         try {
             this.xmlConfiguration = new XMLConfiguration(var1);
@@ -21,7 +22,7 @@ public class Config {
             this.logger.error("Error creating configuration", var5);
 
             try {
-                I.d(var1.toPath());
+                L.d(var1.toPath());
                 this.xmlConfiguration = new XMLConfiguration(var1);
             } catch (Exception var4) {
                 throw new RuntimeException(var4);

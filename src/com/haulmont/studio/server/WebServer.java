@@ -6,6 +6,8 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.io.Closeables;
 import com.haulmont.studio.common.G;
+import com.haulmont.studio.common.H;
+import com.haulmont.studio.ui.app.aL;
 import com.haulmont.studio.ui.app.aY;
 import com.vaadin.server.communication.JSR356WebsocketInitializer;
 import java.io.IOException;
@@ -56,12 +58,12 @@ public class WebServer {
         var3.setContextPath("/studio");
         var3.setInitParameter("productionMode", "true");
         var3.setInitParameter("runFromElectron", String.valueOf(var2));
-        Path var4 = G.a();
+        Path var4 = H.a();
         if (!Files.exists(var4, new LinkOption[0])) {
             throw new IllegalStateException("Invalid web resources path: " + var4);
         } else {
             var3.setResourceBase(var4.toString());
-            ServletHolder var5 = new ServletHolder(new aY());
+            ServletHolder var5 = new ServletHolder(new aL());
             var5.setAsyncSupported(true);
             var5.setInitParameter("UI", "com.haulmont.studio.ui.app.App");
             var5.setInitParameter("UIProvider", "com.haulmont.studio.ui.app.StudioUIProvider");
@@ -130,7 +132,7 @@ public class WebServer {
 
         SLF4JBridgeHandler.install();
         this.logger = LoggerFactory.getLogger(this.getClass());
-        this.logger.info("CUBA Studio v." + G.i() + " built on " + G.j());
+        this.logger.info("CUBA Studio v." + H.i() + " built on " + H.j());
     }
 
     private void setExceptionHandler() {
