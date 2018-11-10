@@ -77,7 +77,7 @@ public class AppStartWindow {
         this.app = app;
         this.stage = stage;
         stage.setResizable(false);
-        String title = "尺子科技开发平台";
+        String title = "克里特科技开发平台";
         String var4 = H.i();
         if (!var4.equals("?")) {
             title = title + " v." + var4;

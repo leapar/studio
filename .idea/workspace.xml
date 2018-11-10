@@ -7,7 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74933309-dbfe-48fc-ab53-40a1772b8bf6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/haulmont/studio/server/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/haulmont/studio/server/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/haulmont/studio/server/launcher/AppStartWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/haulmont/studio/server/launcher/AppStartWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -167,7 +168,13 @@
     <findStrings>
       <find>artif</find>
       <find>V</find>
+      <find>尺子</find>
+      <find>jmyida.com</find>
     </findStrings>
+    <replaceStrings>
+      <replace>克里特</replace>
+      <replace>sketchcub.com</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -279,7 +286,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541858006307" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541858464001" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -327,16 +334,15 @@
       <option name="presentableId" value="Default" />
       <updated>1541853027056</updated>
       <workItem from="1541853028589" duration="1244000" />
-      <workItem from="1541854849830" duration="3149000" />
+      <workItem from="1541854849830" duration="3599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4393000" />
+    <option name="totallyTimeSpent" value="4843000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2283992" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

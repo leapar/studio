@@ -87,7 +87,7 @@ public class App extends Application {
                     if (SystemTray.isSupported()) {
                         var1.hide();
                         if (SystemUtils.IS_OS_WINDOWS && !this.config.isNotifyShown()) {
-                            this.trayIcon.displayMessage("尺子科技开发平台", "应用保持运行，可以通过托盘图标控制.", MessageType.INFO);
+                            this.trayIcon.displayMessage("克里特科技开发平台", "应用保持运行，可以通过托盘图标控制.", MessageType.INFO);
                             this.config.setNotifyShown(true);
                         }
                     } else {
@@ -97,7 +97,7 @@ public class App extends Application {
                 });
             });
             PopupMenu var4 = new PopupMenu();
-            MenuItem var5 = new MenuItem("www.jmyida.com");
+            MenuItem var5 = new MenuItem("www.sketchcub.com");
             var5.addActionListener((var1x) -> {
                 Platform.runLater(this::bringFront);
             });
@@ -118,7 +118,7 @@ public class App extends Application {
                 this.exit();
             });
             var4.add(var6);
-            this.trayIcon = new TrayIcon(var3, "尺子科技开发平台", var4);
+            this.trayIcon = new TrayIcon(var3, "克里特科技开发平台", var4);
             this.trayIcon.setImageAutoSize(true);
             this.trayIcon.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent var1) {
@@ -151,7 +151,7 @@ public class App extends Application {
     private void show(Stage var1) {
         if (this.isSupported() && this.config.isSilentMode()) {
             this.window.start();
-            this.trayIcon.displayMessage("尺子科技开发平台", "服务正在启动...", MessageType.NONE);
+            this.trayIcon.displayMessage("克里特科技开发平台", "服务正在启动...", MessageType.NONE);
         } else {
             var1.show();
         }
