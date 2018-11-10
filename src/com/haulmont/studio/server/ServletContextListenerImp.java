@@ -2,7 +2,7 @@ package com.haulmont.studio.server;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import com.haulmont.studio.ui.m.d;
+import com.haulmont.studio.ui.k.d;
 
 class ServletContextListenerImp implements ServletContextListener {
     private WebServer webServer;

@@ -1,4 +1,6 @@
-package com.haulmont.studio.ui.h;
+package com.haulmont.studio.ui.g;
+
+import com.haulmont.studio.ui.g.a;
 
 /*
         D:\javacodes\studio\lib\studio-ui-6.7.6.jar!\com\haulmont\studio\\ui\\h\\a.class

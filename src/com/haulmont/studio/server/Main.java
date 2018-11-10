@@ -1,29 +1,58 @@
 package com.haulmont.studio.server;
 
 import com.google.common.primitives.Ints;
+import org.apache.commons.codec.digest.DigestUtils;
+
 import javax.annotation.Nullable;
 import javax.swing.*;
 import java.awt.*;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.Objects;
 import java.util.regex.Pattern;
+/*
+studio-backend-6.8.2.jar
 
-public class Main  {
+package com.haulmont.studio.common.c;
+
+import com.haulmont.studio.common.model.bd;
+import java.util.Collection;
+
+public class b
+        extends Exception
+{
+    public b(Collection<bd> paramCollection)
+    {
+        super("Repository containing CUBA artifacts not found in: " + paramCollection);
+    }
+
+    public b(Collection<bd> paramCollection, Throwable paramThrowable)
+    {
+        super("Repository containing CUBA artifacts not found in: " + paramCollection, paramThrowable);
+    }
+}
+
+*/
+public class Main {
     public static void main(String[] args) {
         if (!checkJava()) {
             JDialog.setDefaultLookAndFeelDecorated(true);
-            JDialog var4 = new JDialog();
-            var4.setAlwaysOnTop(true);
-            var4.pack();
-            var4.setDefaultCloseOperation(2);
-            JOptionPane.showMessageDialog(var4, "<html>Studio requires Java SE Development Kit (JDK) 8(minimum 1.8.0_45). <br />Please install the latest JDK and check JAVA_HOME. <br /><br />Your JDK version: " + System.getProperty("java.version"), "Failed run", 0);
+            JDialog localJDialog = new JDialog();
+            localJDialog.setAlwaysOnTop(true);
+            localJDialog.pack();
+            localJDialog.setDefaultCloseOperation(2);
+            JOptionPane.showMessageDialog(localJDialog, "<html>Studio requires Java SE Development Kit (JDK) 8(minimum 1.8.0_45). <br />Please install the latest JDK and check JAVA_HOME. <br /><br />Your JDK version: " +
+
+                    System.getProperty("java.version"), "Failed run", 0);
             System.exit(-1);
+            return;
         } else {
             /*Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
             primaryStage.setTitle("Hello World");
             primaryStage.setScene(new Scene(root, 300, 275));
             primaryStage.show();*/
-            boolean var1 = checkArg("-nogui", args);
-            if (!var1 && !GraphicsEnvironment.isHeadless()) {
+            boolean bool = checkArg("-nogui", args);
+            if (!bool && !GraphicsEnvironment.isHeadless()) {
                 System.out.println("Run Studio GUI");
                 run();
             } else {
@@ -40,7 +69,7 @@ public class Main  {
         String[] var2 = var1;
         int var3 = var1.length;
 
-        for(int var4 = 0; var4 < var3; ++var4) {
+        for (int var4 = 0; var4 < var3; ++var4) {
             String var5 = var2[var4];
             if (var5.startsWith(var0 + "=")) {
                 return var5.split("=")[1];
@@ -64,17 +93,13 @@ public class Main  {
 
     }
 
-    private static boolean checkArg(String var0, String... var1) {
-        String[] var2 = var1;
-        int var3 = var1.length;
-
-        for(int var4 = 0; var4 < var3; ++var4) {
-            String var5 = var2[var4];
-            if (Objects.equals(var5, var0)) {
+    private static boolean checkArg(String paramString, String... paramVarArgs)
+    {
+        for (String str : paramVarArgs) {
+            if (Objects.equals(str, paramString)) {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -95,7 +120,7 @@ public class Main  {
             String[] var3 = var2.split(v1);
             String[] var4 = var2.split(v2);
 
-            for(int var5 = 0; var5 < var3.length; ++var5) {
+            for (int var5 = 0; var5 < var3.length; ++var5) {
                 if (var4.length <= var5) {
                     return -1;
                 }

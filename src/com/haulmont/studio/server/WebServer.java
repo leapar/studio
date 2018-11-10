@@ -1,14 +1,11 @@
 package com.haulmont.studio.server;
 
-
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.io.Closeables;
-import com.haulmont.studio.common.G;
 import com.haulmont.studio.common.H;
-import com.haulmont.studio.ui.app.aL;
-import com.haulmont.studio.ui.app.aY;
+import com.haulmont.studio.ui.app.aH;
 import com.vaadin.server.communication.JSR356WebsocketInitializer;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,9 +18,11 @@ import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.LogManager;
-
+import org.eclipse.jetty.server.Handler;
 import com.vaadin.ui.UIDetachedException;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.HandlerList;
+import org.eclipse.jetty.server.handler.ShutdownHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.gradle.api.Nullable;
@@ -63,24 +62,31 @@ public class WebServer {
             throw new IllegalStateException("Invalid web resources path: " + var4);
         } else {
             var3.setResourceBase(var4.toString());
-            ServletHolder var5 = new ServletHolder(new aL());
+            ServletHolder var5 = new ServletHolder(new aH());
             var5.setAsyncSupported(true);
             var5.setInitParameter("UI", "com.haulmont.studio.ui.app.App");
             var5.setInitParameter("UIProvider", "com.haulmont.studio.ui.app.StudioUIProvider");
             var5.setInitParameter("widgetset", "com.haulmont.studio.ui.StudioApplicationWidgetset");
             var5.setInitParameter("org.atmosphere.websocket.maxIdleTime", "3600000");
+            if (var2) {
+                var5.setInitParameter("heartbeatInterval", "-1");
+            }
             var3.addServlet(var5, "/*");
             var3.addServlet(var5, "/VAADIN/*");
             var3.addEventListener(new JSR356WebsocketInitializer());
             var3.addEventListener(new ServletContextListenerImp(this));
             var3.addEventListener(new HttpSessionListenerImp(this));
             var3.addEventListener(new ServletRequestListenerImp(this));
-            this.server.setHandler(var3);
+            ShutdownHandler var6 = new ShutdownHandler("studio", true, false);
+            HandlerList var7 = new HandlerList();
+            var7.setHandlers(new Handler[]{var3, var6});
+
+            this.server.setHandler(var7);
 
             try {
                 this.server.start();
-            } catch (Exception var7) {
-                throw new RuntimeException("Unable to start server", var7);
+            } catch (Exception var9) {
+                throw new RuntimeException("Unable to start server", var9);
             }
 
             var3.getSessionHandler().getSessionManager().setMaxInactiveInterval(var2 ? -1 : 86400);

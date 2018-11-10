@@ -3,15 +3,18 @@
 // (powered by Fernflower decompiler)
 //
 
-package com.haulmont.studio.backend.i;
+package com.haulmont.studio.backend.license;
 
 import com.google.common.base.Strings;
-import com.haulmont.studio.backend.j.d;
+import com.haulmont.studio.backend.g.d;
 import com.haulmont.studio.common.C;
 import com.haulmont.studio.common.H;
 import com.haulmont.studio.common.L;
 import com.haulmont.studio.common.e;
-import com.haulmont.studio.common.model.b.n;
+import com.haulmont.studio.common.p;
+
+import com.haulmont.studio.common.model.base.BaseProject;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Constructor;
@@ -37,99 +40,106 @@ import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+
+import com.haulmont.studio.common.model.base.BaseProject;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.http.conn.HttpHostConnectException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class a {
+public class SubscriptionManager {
     private static final int c = 5000;
-    public static final String a = new String(new byte[]{115, 116, 117, 100, 105, 111, 46, 115, 117, 98, 115, 46, 108, 111, 103});
-    private static final Logger d = LoggerFactory.getLogger(a.class);
+    public static final String a = "studio.subs.log";
+    private static final Logger d = LoggerFactory.getLogger(SubscriptionManager.class);
     private static final int e = 600;
     public static final SimpleDateFormat b = new SimpleDateFormat("yyyy-MM-dd");
-    private String f;
-    private ScheduledExecutorService g;
-    private e h;
+    private String g;
+    private ScheduledExecutorService h;
+    private e i;
 
-    public a(e var1) {
-        this.h = var1;
+    public SubscriptionManager(e var1) {
+        this.i = var1;
     }
 
     @PostConstruct
     public void a() {
-        this.g = Executors.newSingleThreadScheduledExecutor();
-        this.g.scheduleAtFixedRate(this::i, 0L, 600L, TimeUnit.SECONDS);
+        this.h = Executors.newSingleThreadScheduledExecutor();
+        this.h.scheduleAtFixedRate(this::i, 0L, 600L, TimeUnit.SECONDS);
     }
 
     @PreDestroy
     public void b() {
-        this.g.shutdownNow();
+        this.h.shutdownNow();
     }
 
     public d c() {
         Path var1 = this.j();
         if (!Files.exists(var1, new LinkOption[0])) {
-            return com.haulmont.studio.backend.j.d.b;
+            return com.haulmont.studio.backend.g.d.FILE_NOT_FOUND;
         } else {
             String var2 = L.b(var1);
-            f var3 = this.e(var2);
+            com.haulmont.studio.backend.license.d var3 = this.f(var2);
             if (var3 == null) {
-                return com.haulmont.studio.backend.j.d.c;
+                return com.haulmont.studio.backend.g.d.INVALID_FILE;
             } else if (!var3.g() && !var3.e().before(new Date())) {
-                return var3.f() ? com.haulmont.studio.backend.j.d.e : com.haulmont.studio.backend.j.d.a;
+                return var3.f() ? com.haulmont.studio.backend.g.d.SUBSCRIPTION_BANNED : com.haulmont.studio.backend.g.d.NO_ERROR;
             } else {
-                return com.haulmont.studio.backend.j.d.d;
+                return com.haulmont.studio.backend.g.d.SUBSCRIPTION_EXPIRED;
             }
         }
     }
 
-    public c a(String var1) {
+    public SubscriptionManager$ActivationResult a(String var1) {
         try {
             String var2 = this.c(var1);
             if (!Strings.isNullOrEmpty(var2)) {
                 Path var3 = this.j();
                 Files.write(var3, var2.getBytes(), new OpenOption[0]);
-                return com.haulmont.studio.backend.i.c.c;
+                return SubscriptionManager$ActivationResult.SUCCESS;
             } else {
-                return com.haulmont.studio.backend.i.c.a;
+                return SubscriptionManager$ActivationResult.ACTIVATION_FAILED;
             }
         } catch (Exception var5) {
             this.a(var5);
-            return com.haulmont.studio.backend.i.c.a;
+            return SubscriptionManager$ActivationResult.ACTIVATION_FAILED;
         }
     }
 
     private void i() {
         d var1 = this.c();
-        if (var1 == com.haulmont.studio.backend.j.d.a) {
+        if (var1 == com.haulmont.studio.backend.g.d.NO_ERROR || var1 == com.haulmont.studio.backend.g.d.SUBSCRIPTION_EXPIRED) {
             String var2 = this.f();
-            if (var2 != null) {
-                try {
-                    String var3 = this.c(var2);
-                    if (!Strings.isNullOrEmpty(var3)) {
-                        Files.write(this.j(), var3.getBytes(), new OpenOption[0]);
-                    }
-                } catch (Exception var4) {
-                    this.a(var4);
-                }
-
+            if (var2 == null) {
+                return;
             }
+
+            try {
+                String var3 = this.c(var2);
+                if (!Strings.isNullOrEmpty(var3)) {
+                    Files.write(this.j(), var3.getBytes(), new OpenOption[0]);
+                }
+            } catch (Exception var4) {
+                this.a(var4);
+            }
+
         }
     }
+
+
 
     @Nullable
     private String c(String var1) {
 
         return var1;
         /*
-        String var2 = this.d(var1);
+        String var2 = this.e(var1);
         SystemDefaultRoutePlanner var3 = new SystemDefaultRoutePlanner(ProxySelector.getDefault());
         RequestConfig var4 = RequestConfig.custom().setConnectTimeout(5000).build();
-        CloseableHttpClient var5 = HttpClients.custom().setDefaultRequestConfig(var4).setRoutePlanner(var3).build();
+        CloseableHttpClient var5 = HttpClients.custom().useSystemProperties().setDefaultCredentialsProvider(p.b(var2)).setDefaultRequestConfig(var4).setRoutePlanner(var3).build();
         Throwable var6 = null;
 
-        String var12;
+        String var11;
         try {
             HttpGet var7 = new HttpGet(var2);
             CloseableHttpResponse var8 = var5.execute(var7);
@@ -139,9 +149,9 @@ public class a {
                 int var10 = var8.getStatusLine().getStatusCode();
                 if (var10 == 200) {
                     var11 = EntityUtils.toString(var8.getEntity());
-                    if (this.h.u() && !b(var11)) {
-                        d.error("Incorrect sif content: " + var11);
-                        //throw new com.haulmont.studio.common.c.f("Incorrect sif content");
+                    if (this.i.u() && (!b(var11) || !this.d(var11))) {
+                        e.error("Incorrect sif content: " + var11);
+                        throw new h("Incorrect sif content");
                     }
 
                     String var12 = var11;
@@ -149,7 +159,7 @@ public class a {
                 }
 
                 if (var10 == 503) {
-                    throw new com.haulmont.studio.backend.j.d(this);
+                    throw new b(this);
                 }
 
                 var11 = null;
@@ -172,19 +182,26 @@ public class a {
             }
         } catch (Throwable var40) {
             var6 = var40;
-
+            throw var40;
         } finally {
             if (var5 != null) {
-                try {
+                if (var6 != null) {
+                    try {
+                        var5.close();
+                    } catch (Throwable var36) {
+                        var6.addSuppressed(var36);
+                    }
+                } else {
                     var5.close();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
                 }
             }
 
         }
 
         return var11;*/
+    }
+    private boolean d(String var1) {
+        return var1.length() == 354;
     }
 
     public static boolean b(String var0) {
@@ -193,18 +210,23 @@ public class a {
         return var1.matcher(var0).matches() && var2.matcher(var0).matches();
     }
 
-    private String d(String var1) {
+    private String e(String var1) {
         String var2 = new String(new byte[]{104, 116, 116, 112, 115, 58, 47, 47, 99, 104, 101, 99, 107, 115, 105, 100, 46, 99, 117, 98, 97, 45, 112, 108, 97, 116, 102, 111, 114, 109, 46, 99, 111, 109});
         String var3 = new String(new byte[]{115, 105, 100});
         String var4 = new String(new byte[]{108, 105, 100});
+        var2 = "https://checksid.cuba-platform.com";
+        var3 = "sid";
+        var4 = "lid";
+
         return var2 + "?" + var3 + "=" + var1 + "&" + var4 + "=" + this.d();
     }
 
     public String d() {
-        if (this.f != null) {
-            return this.f;
+        if (this.g != null) {
+            return this.g;
         } else {
             String var1 = new String(new byte[]{117, 115, 101, 114, 46, 110, 97, 109, 101});
+            var1 = "user.name";
             String var2 = System.getProperty(var1);
             String var3 = null;
             String var4 = null;
@@ -212,11 +234,16 @@ public class a {
             try {
                 InetAddress var5 = InetAddress.getLocalHost();
                 var4 = var5.getHostName();
-                NetworkInterface var6 = NetworkInterface.getByInetAddress(var5);
+                /*
+var4 = "wangxiaohua"
+var5 = {Inet4Address@495} "wangxiaohua/172.26.32.1"
+name:eth3 (Hyper-V Virtual Ethernet Adapter #4)
+*/
+                NetworkInterface var6 = NetworkInterface.getByInetAddress(var5);//name:eth3 (Hyper-V Virtual Ethernet Adapter #4)
                 if (var6 != null) {
                     byte[] var7 = var6.getHardwareAddress();
                     if (var7 != null) {
-                        var3 = DigestUtils.md5Hex(var7);
+                        var3 = DigestUtils.md5Hex(var7);//506fd8e420a1c021a611c3c19bea3202
                     } else {
                         var3 = DigestUtils.md5Hex(new byte[]{1, 1, 1, 1, 1, 1});
                     }
@@ -227,33 +254,33 @@ public class a {
                 this.a(var8);
             }
 
-            String var9 = var2 + (var4 != null ? var4 : "") + (var3 != null ? var3 : "");
-            this.f = DigestUtils.md5Hex(var9.getBytes());
-            return this.f;
+            String var9 = var2 + (var4 != null ? var4 : "") + (var3 != null ? var3 : "");//WXHwangxiaohua506fd8e420a1c021a611c3c19bea3202
+            this.g = DigestUtils.md5Hex(var9.getBytes());//c70c46d9ae520870d24a1bd8efe2c9f9
+            return this.g;
         }
     }
 
     private Path j() {
-        String var1 = new String(new byte[]{115, 105, 102, 46, 100, 97, 116});
+        String var1 = new String(new byte[]{115, 105, 102, 46, 100, 97, 116});//sif.dat
         return H.d().resolve(var1);
     }
 
     @Nullable
-    public f e() {
+    public com.haulmont.studio.backend.license.d e() {
         Path var1 = this.j();
         if (!Files.exists(var1, new LinkOption[0])) {
             return null;
         } else {
             String var2 = L.b(var1);
-            return this.e(var2);
+            return this.f(var2);
         }
     }
 
     @Nullable
-    private f e(String var1) {
+    private com.haulmont.studio.backend.license.d f(String var1) {
         try {
             if (true) {
-                String  var26 = "sid=170704000693-OOOYQOk9IJO1IFG\n" +
+                String var26 = "sid=170704000693-OOOYQOk9IJO1IFG\n" +
                         "type=C\n" +
                         "name=wang liulsha\n" +
                         "company=luilsh\n" +
@@ -263,7 +290,7 @@ public class a {
 
                 Properties var27 = new Properties();
                 var27.load(new StringReader(var26));
-                return new f(this, var27);
+                return new com.haulmont.studio.backend.license.d(this, var27);
             }
 
             BigInteger var2 = new BigInteger("17369712262290647732768133445861332449863405383733306695896586821166245382729380222118948668590047591903813382253186640467063376463309880263824085810383552963627855603429835060435976633955217307266714318344160886538360012623239010786668755679438900124601074924850696725233212494777766999123952653273738958617798460338184668049410136792403729341479373919634041235053823478242208651592611582439749292909499663165109004083820192135244694907138372731716013807836312280426304459316963033144149631900633817073029029413556757588486052978078614048837784810650766996280232645714319416096306667876390555673421669667406990886847");
@@ -294,7 +321,7 @@ public class a {
             String var26 = new String((byte[])((byte[])var25), StandardCharsets.UTF_8);
             Properties var27 = new Properties();
             var27.load(new StringReader(var26));
-            return new f(this, var27);
+            return new com.haulmont.studio.backend.license.d(this, var27);
         } catch (Exception var28) {
             this.a(var28);
             return null;
@@ -303,13 +330,13 @@ public class a {
 
     @Nullable
     public String f() {
-        f var1 = this.e();
+        com.haulmont.studio.backend.license.d var1 = this.e();
         return var1 != null ? var1.a() : null;
     }
 
     @Nullable
     public C<String, String> g() {
-        f var1 = this.e();
+        com.haulmont.studio.backend.license.d var1 = this.e();
         if (var1 != null) {
             String[] var2 = var1.a().split("-");
             return new C(var2[0], var2[1]);
@@ -318,28 +345,31 @@ public class a {
         }
     }
 
+
     public void h() {
         Path var1 = this.j();
 
         try {
             Files.deleteIfExists(var1);
         } catch (IOException var3) {
-            this.a((Exception)var3);
+            this.a((Exception) var3);
         }
     }
 
-    public boolean a(Collection<n> var1) {
+
+
+    public boolean a(Collection<BaseProject> var1) {
         List var2 = Arrays.asList("charts", "reports", "bpm", "fts", "ccpayments", "workflow");
         Iterator var3 = var1.iterator();
 
-        n var4;
+        BaseProject var4;
         do {
             if (!var3.hasNext()) {
                 return false;
             }
 
-            var4 = (n)var3.next();
-        } while(!var2.contains(var4.getName()));
+            var4 = (BaseProject)var3.next();
+        } while(!var2.contains(var4.getName()) || com.haulmont.studio.backend.pm.b.a(var4));
 
         return true;
     }

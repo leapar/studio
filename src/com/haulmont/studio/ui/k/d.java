@@ -1,8 +1,8 @@
-package com.haulmont.studio.ui.m;
+package com.haulmont.studio.ui.k;
 
-import com.haulmont.studio.backend.ed.ddl.C;
-import com.haulmont.studio.ui.app.aB;
-import com.haulmont.studio.ui.h.c;
+import com.haulmont.studio.backend.ed.ddl.A;
+import com.haulmont.studio.ui.app.ax;
+import com.haulmont.studio.ui.g.c;
 import com.haulmont.studio.backend.plugin.j;
 //import com.haulmont.studio.backend.plugin.a.i;
 //import com.haulmont.studio.backend.e.c.w;
@@ -13,6 +13,7 @@ import org.eclipse.jetty.server.Server;
 import org.picocontainer.MutablePicoContainer;
 import org.picocontainer.PicoBuilder;
 import org.picocontainer.lifecycle.LifecycleState;
+import com.haulmont.studio.backend.license.SubscriptionManager;
 
 public class d implements b {
     public static final String a = "ServerBeans";
@@ -23,21 +24,21 @@ public class d implements b {
     {
         this.b = new PicoBuilder().withCaching().withJavaEE5Lifecycle().build();
 
-        this.b.addComponent(aB.class);
+        this.b.addComponent(ax.class);
         this.b.addComponent(j.class);
         //this.b.addComponent(i.class);
         Class cls = null;
         try {
-            cls = Class.forName("com.haulmont.studio.backend.plugin.a.i");
+            cls = Class.forName("com.haulmont.studio.backend.plugin.dynamic.i");
             this.b.addComponent(cls);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        this.b.addComponent(com.haulmont.studio.backend.i.a.class);
+        this.b.addComponent(SubscriptionManager.class);
         this.b.addComponent(c.class);
-        this.b.addComponent(com.haulmont.studio.ui.h.a.class);
+        this.b.addComponent(com.haulmont.studio.ui.g.a.class);
         this.b.addComponent(e.class);
-        this.b.addComponent(C.class);
+        this.b.addComponent(A.class);
 
         this.b.start();
     }
